@@ -6,12 +6,12 @@
 <title>WPattern Spring MVC</title>
 </head>
 <body>
-	<c:choose>
-		<c:when test="${contact.id == null}"><h2>Add Contact</h2></c:when>
-		<c:when test="${contact.id != null}"><h2>Edit Contact</h2></c:when>
-	</c:choose>
+	<choose>
+		<when test="${contact.id == null}"><h2>Add Contact</h2></when>
+		<when test="${contact.id != null}"><h2>Edit Contact</h2></when>
+	</choose>
 	
-	<form:form method="post" action="/contact/save.html" modelAttribute="contact">
+	<form method="post" action="/contact/save.html" modelAttribute="contact">
 		<input name="id" value="${contact.id}" hidden="true"  />
 		<label>First Name: </label> <input name="firstname" value="${contact.firstname}" /> <br/>
 		<label>Last Name: </label> <input name="lastname" value="${contact.lastname}" /> <br/>
@@ -22,6 +22,6 @@
 		
 		<input type="submit" name="action" value="Save" />
 		<input type="submit" name="action" value="Cancel" />
-	</form:form>
+	</form>
 </body>
 </html>

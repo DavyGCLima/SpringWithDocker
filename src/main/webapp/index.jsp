@@ -12,8 +12,8 @@
 	<center>
 		<h2>Spring MVC</h2>
 		<h4>
-			<a href="/wpattern-frameworks-spring-mvc-0.0.1-SNAPSHOT/hello/controller.html">Hello</a> <br/>
-			<a href="/wpattern-frameworks-spring-mvc-0.0.1-SNAPSHOT/contact.html">Contacts</a>
+			<a href="/springtest/hello/controller.html">Hello</a> <br/>
+			<a href="/springtest/contact.html">Contacts</a>
 		</h4>
 	</center>
 </body>

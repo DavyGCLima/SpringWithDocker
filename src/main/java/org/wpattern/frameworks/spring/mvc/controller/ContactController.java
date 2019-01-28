@@ -21,24 +21,24 @@ public class ContactController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView list() {
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info("List all contacts.");
-		}
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("List all contacts.");
+            }
 
-		ContactFormBean contactForm = new ContactFormBean();
+            ContactFormBean contactForm = new ContactFormBean();
 
-		contactForm.setContacts(Dataset.getContacts());
-
-		return new ModelAndView("/contact/list", "contactForm", contactForm);
+            contactForm.setContacts(Dataset.getContacts());
+                
+            return new ModelAndView("/contact/list", "contactForm", contactForm);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add() {
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info("Creating a new contact.");
-		}
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Creating a new contact.");
+            }
 
-		return "/contact/addEdit";
+            return "/contact/addEdit";
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -50,85 +50,85 @@ public class ContactController {
 		Iterator<ContactBean> iterator = Dataset.getContacts().iterator();
 
 		while (iterator.hasNext()) {
-			ContactBean contact = iterator.next();
+                    ContactBean contact = iterator.next();
 
-			if (contact.getId() == id) {
-				iterator.remove();
-			}
+                    if (contact.getId() == id) {
+                        iterator.remove();
+                    }
 		}
 
-		return this.list();
+            return this.list();
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam("id") int id) {
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info(String.format("Edit the contact with id [%s].", id));
-		}
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info(String.format("Edit the contact with id [%s].", id));
+            }
 
-		Iterator<ContactBean> iterator = Dataset.getContacts().iterator();
+            Iterator<ContactBean> iterator = Dataset.getContacts().iterator();
 
-		while (iterator.hasNext()) {
-			ContactBean contact = iterator.next();
+            while (iterator.hasNext()) {
+                ContactBean contact = iterator.next();
 
-			if (contact.getId() == id) {
-				return new ModelAndView("/contact/addEdit", "contact", contact);
-			}
-		}
+                if (contact.getId() == id) {
+                    return new ModelAndView("/contact/addEdit", "contact", contact);
+                }
+            }
 
-		return this.list();
+            return this.list();
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("contact") ContactBean contact, @RequestParam("action") String action) {
-		if ((action != null) && (action.trim().toLowerCase().equals("cancel"))) {
-			return this.list();
-		}
+            if ((action != null) && (action.trim().toLowerCase().equals("cancel"))) {
+                return this.list();
+            }
 
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info(String.format("Saving the contact [%s].", contact));
-		}
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info(String.format("Saving the contact [%s].", contact));
+            }
 
-		if (contact == null) {
-			LOGGER.error("Contact not received.");
+            if (contact == null) {
+                LOGGER.error("Contact not received.");
 
-			return this.list();
-		} else if (contact.getId() == null) {
-			Dataset.addContact(contact);
-		} else {
-			Dataset.updateContact(contact);
-		}
+                return this.list();
+            } else if (contact.getId() == null) {
+                    Dataset.addContact(contact);
+            } else {
+                Dataset.updateContact(contact);
+            }
 
-		return this.list();
+            return this.list();
 	}
 
 	@RequestMapping(value = "/listEdit", method = RequestMethod.GET)
 	public ModelAndView listEdit() {
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info("List all contacts.");
-		}
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("List all contacts.");
+            }
 
-		ContactFormBean contactForm = new ContactFormBean();
+            ContactFormBean contactForm = new ContactFormBean();
 
-		contactForm.setContacts(Dataset.getContacts());
+            contactForm.setContacts(Dataset.getContacts());
 
-		return new ModelAndView("/contact/listEdit", "contactForm", contactForm);
+            return new ModelAndView("/contact/listEdit", "contactForm", contactForm);
 	}
 
 	@RequestMapping(value = "/saveList", method = RequestMethod.POST)
 	public ModelAndView saveList(@ModelAttribute("contactForm") ContactFormBean contactForm,
 			@RequestParam("action") String action) {
-		if ((action != null) && (action.trim().toLowerCase().equals("cancel"))) {
-			return this.list();
-		}
+            if ((action != null) && (action.trim().toLowerCase().equals("cancel"))) {
+                return this.list();
+            }
 
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info("Saving all contacts.");
-		}
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Saving all contacts.");
+            }
 
-		Dataset.setContacts(contactForm.getContacts());
+            Dataset.setContacts(contactForm.getContacts());
 
-		return this.list();
+            return this.list();
 	}
 
 }
