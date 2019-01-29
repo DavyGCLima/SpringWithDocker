@@ -7,40 +7,38 @@
         
     </head>
     <body>
-            <h2>Contacts</h2>
-            <c:set var="baseURL" value="${pageContext.request.localName}"/>
+        <h2>Contacts</h2>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th></th>
+                <th></th>
+            </tr>
+                <c:forEach items="${contactForm.contacts}" var="contact">
+            <tr>
+                <td>${contact.id}</td>
+                <td>${contact.firstname}</td>
+                <td>${contact.lastname}</td>
+                <td>${contact.email}</td>
+                <td>${contact.phone}</td>
+                <td> <a href="/contact/edit.html?id=${contact.id}">Edit</a> </td>
+                <td> <a href="/contact/delete.html?id=${contact.id}">Delete</a> </td>
+            </tr>
+        </c:forEach>
+        </table>
 
-            <table>
-                    <tr>
-                            <th>Id</th>
-                            <th>First Name</th>
-                            <th>Last name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th></th>
-                            <th></th>
-                    </tr>
-                    <c:forEach items="${contactForm.contacts}" var="contact">
-                            <tr>
-                                    <td>${contact.id}</td>
-                                    <td>${contact.firstname}</td>
-                                    <td>${contact.lastname}</td>
-                                    <td>${contact.email}</td>
-                                    <td>${contact.phone}</td>
-                                    <td> <a href="${baseURL}/contact/edit.html?id=${contact.id}">Edit</a> </td>
-                                    <td> <a href="${baseURL}/contact/delete.html?id=${contact.id}">Delete</a> </td>
-                            </tr>
-                    </c:forEach>
-            </table>
+        <br/>
 
-            <br/>
+        <form:form action="/contact/add.html" method="get">
+            <input type="submit" value="Add" />
+        </form:form>
 
-            <form:form action="/contact/add.html" method="get">
-                    <input type="submit" value="Add" />
-            </form:form>
-
-            <form:form action="/contact/listEdit.html" method="get">
-                    <input type="submit" value="List Edit" />
-            </form:form>
+        <form:form action="/contact/listEdit.html" method="get">
+                <input type="submit" value="List Edit" />
+        </form:form>
     </body>
 </html>
